@@ -1,6 +1,6 @@
 #verification login and signup
 
-async def verification():
+async def verificationHandler():
     pass
 
 
@@ -17,6 +17,11 @@ async def signupHandler(user_data):
         dicu["password"] = user_data.get("password")
         dicu["phone"] = user_data.get("phone")
         dicu["role"] = user_data.get("role")
+        dicu["verified"] = False
+        print("dicu is : ",dicu)
+
+        #get inbox id from firebase
+        #create id and userid from account table
         
         return dicu
 
