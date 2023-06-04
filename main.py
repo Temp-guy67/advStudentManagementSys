@@ -24,7 +24,7 @@ async def signup(request : Request):
         return {"message" : response}
 
     except Exception as e :
-        print(" Hoga mara gese in main ",e)
+        print("[main][signup]Failed ",e)
     return "working"
 
 
