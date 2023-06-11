@@ -1,0 +1,105 @@
+2023-06-10 19:07:39,485 - ERROR - [verification][Exception in signupHandler]  unhashable type: 'dict' - verification.py:32
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Filter/verification.py", line 25, in signupHandler
+    dicu[ROLE] = user_data.get("role")
+TypeError: unhashable type: 'dict'
+2023-06-10 19:08:21,313 - ERROR - [verification][Exception in signupHandler]  unhashable type: 'dict' - verification.py:32
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Filter/verification.py", line 25, in signupHandler
+    dicu[ROLE] = user_data.get("role")
+TypeError: unhashable type: 'dict'
+2023-06-10 19:09:00,781 - ERROR - [verification][Exception in signupHandler]  unhashable type: 'dict' - verification.py:32
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Filter/verification.py", line 25, in signupHandler
+    dicu[ROLE] = user_data.get("role")
+TypeError: unhashable type: 'dict'
+2023-06-10 19:46:35,034 - ERROR - [generateSupportFields][Exception in signUpSupports] 'dept' - generateSupportFields.py:42
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Actions/generateSupportFields.py", line 21, in signUpSupports
+    subjectCode = DEPTCODE[DEPT]
+KeyError: 'dept'
+2023-06-10 19:55:33,504 - ERROR - [generateSupportFields][Exception in signUpSupports] 'dept' - generateSupportFields.py:42
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Actions/generateSupportFields.py", line 21, in signUpSupports
+    subjectCode = DEPTCODE[DEPT]
+KeyError: 'dept'
+2023-06-10 19:56:23,394 - ERROR - [generateSupportFields][Exception in signUpSupports] 'str' object has no attribute 'get' - generateSupportFields.py:42
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Actions/generateSupportFields.py", line 32, in signUpSupports
+    userId = ROLE.get(role) + "_" + str(random_int) + "_" + str(current_time_millis)
+AttributeError: 'str' object has no attribute 'get'
+2023-06-10 21:24:51,269 - ERROR - [generateSupportFields][Exception in signUpSupports] near "@testmail": syntax error - DBOperations.py:44
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 37, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: near "@testmail": syntax error
+2023-06-10 21:26:12,641 - ERROR - [generateSupportFields][Exception in signUpSupports] near "@testmail": syntax error - DBOperations.py:45
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 38, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: near "@testmail": syntax error
+2023-06-10 21:26:58,929 - ERROR - [generateSupportFields][Exception in signUpSupports] near "@testmail": syntax error - DBOperations.py:44
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 37, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: near "@testmail": syntax error
+2023-06-10 21:27:32,160 - ERROR - [generateSupportFields][Exception in signUpSupports] near "@testmail": syntax error - DBOperations.py:45
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 38, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: near "@testmail": syntax error
+2023-06-10 21:27:45,314 - ERROR - [generateSupportFields][Exception in signUpSupports] near "@testmail": syntax error - DBOperations.py:45
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 38, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: near "@testmail": syntax error
+2023-06-10 21:28:28,134 - ERROR - [generateSupportFields][Exception in signUpSupports] near "@testmail": syntax error - DBOperations.py:45
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 38, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: near "@testmail": syntax error
+2023-06-10 21:40:30,535 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:48
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 41, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-10 21:43:00,339 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:48
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 41, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-10 21:43:35,466 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-10 21:45:05,259 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-10 21:46:25,007 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-11 08:16:34,260 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-11 08:18:29,197 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named email - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named email
+2023-06-11 08:42:19,985 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named password - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named password
+2023-06-11 08:43:02,890 - ERROR - [generateSupportFields][Exception in signUpSupports] table AccountsData has no column named dept - DBOperations.py:49
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 42, in __insertIntoTableTemplate
+    cursor.execute(query, values)
+sqlite3.OperationalError: table AccountsData has no column named dept

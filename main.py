@@ -1,13 +1,18 @@
 from fastapi import FastAPI,Request,Response
 from fastapi.responses import JSONResponse
-from Handler.verification import signupHandler,loginHandler
+from Filter.verification import signupHandler,loginHandler
+from Commons.services import onStartService
+
 
 app = FastAPI()
+
+@app.on_event("startup")
+async def startService():
+    await onStartService()
 
 @app.get("/")
 def root():
     return "Hello from Space! 🚀"
-
 
 
 @app.get("/public/login")

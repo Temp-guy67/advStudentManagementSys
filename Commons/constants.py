@@ -13,7 +13,15 @@ FNAME="fname"
 MNAME="mname"
 LNAME="lname"
 DEPT="dept"
+ROLE="role"
+CLASS="class"
+ACCESS_LEVEL="access_level"
 
 
-CLASS={"EE":"16","CS":"11"}
-ROLE={"1":"SD","2":"TH","3":"ST", "4":"SF"}
+DEPTCODE={"EE":"16","CS":"11"}
+USERROLE={"1":"SD","2":"TH","3":"ST", "4":"SF"}
+
+def db_constants():
+    def acccountData():
+        ID="ID"
+        EMAIL="EMAIL"

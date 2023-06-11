@@ -1,8 +1,8 @@
 #verification login and signup
-from Actions.constants import ROLE,EMAIL,PASSWORD,PHONE,VERIFIED,ROLE,DEPT
-from FireabaseDB.firebase_get import getLast
-from SQLDB.create import createDB
-from Actions.generateSupportFields import signUpSupports
+from Commons.constants import ROLE,EMAIL,PASSWORD,PHONE,VERIFIED,ROLE,DEPT
+from Commons.generateSupportFields import signUpSupports
+import logging
+
 
 async def verificationHandler():
     pass
@@ -23,12 +23,14 @@ async def signupHandler(user_data):
         dicu[VERIFIED] = 0
         dicu[ROLE] = user_data.get("role")
         dicu[DEPT]  = user_data.get("dept")
-        signUpSupports(dicu)
+        # print(" DICU in signupHandler",dicu)
+        await signUpSupports(dicu)
 
         return 
 
     except Exception as e :
-        print("[verification][signupHandler] ",e)
+        logging.exception("[verification][Exception in signupHandler]  %s", str(e))
+        # print("",e)
 
     return "Gar Mara"
 
