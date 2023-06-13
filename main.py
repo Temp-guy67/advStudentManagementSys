@@ -16,8 +16,19 @@ def root():
 
 
 @app.get("/public/login")
-async def login():
-    return "Hello from Space! 🚀"
+async def login(request : Request):
+    user_data = await request.json()
+
+    try:
+        temp = await loginHandler(user_data)
+        response = JSONResponse(content=temp)
+        pass
+
+
+    except Exception as e :
+        pass
+
+
 
 @app.get("/public/signup")
 async def signup(request : Request):
@@ -26,11 +37,9 @@ async def signup(request : Request):
     try :
         temp = await signupHandler(user_data)
         response = JSONResponse(content=temp)
-        return {"message" : response}
 
     except Exception as e :
         print("[main][signup]Failed ",e)
-    return "working"
 
 
 

@@ -6,7 +6,10 @@ import logging
 def configure_logging():
     logging.basicConfig(
         filename='app.log',
-        filemode='w',
-        format='%(name)s - %(levelname)s - %(message)s'
+        filemode='a',
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.info("Logger Inititated")
+    print("Logger Inititated")
 

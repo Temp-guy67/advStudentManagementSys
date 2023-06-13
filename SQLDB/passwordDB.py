@@ -1,91 +1,83 @@
 import random,string,sqlite3,hashlib
+from SQLDB.DBOperations import dbOperationHandler
+from Commons.constants import USER_ID,PASSWORD
 
 
-async def savePassword(userId, password):
+DB_NAME="DBFiles/Passwords.db"
+
+async def savePassword(data):
     try:
-        salt = generate_salt(10)
-        hashedPassword = generate_hash(password, salt)
-        print("hashedPassword ",hashedPassword ,"salt ",salt )
-        status = updatePasswordDB(userId, salt, hashedPassword)
-        return status
+        await __createPasswordTableInDB()
+        userId = data[USER_ID]
+        password = data[PASSWORD]
+        salt = await __generate_salt(10)
+        hashedPassword = await __generate_hash(password, salt)
+
+        dicu = dict()
+        dicu["id"] = userId
+        dicu["salt"] = salt
+        dicu["hashed_password"] = hashedPassword
+        await __insertDataInPasswordTable(dicu)
     except Exception as ex:
         print("[password][savePassword]",ex)
 
-async def create():
+
+async def __createPasswordTableInDB():
     try:
-
-        def create_table(table_name, columns):
-            # Establish a connection to the SQLite database
-            conn = sqlite3.connect('Account.db')
-            cursor = conn.cursor()
-
-            # Construct the CREATE TABLE query
-            query = f"CREATE TABLE IF NOT EXISTS {table_name} ({', '.join(columns)})"
-
-            # Execute the query
-            cursor.execute(query)
-
-            # Commit the changes and close the connection
-            conn.commit()
-            conn.close()
-
-        # Example usage
+        db_name = DB_NAME
         table_name = 'Passwords'
-        columns = [
-            'ID TEXT PRIMARY KEY',
-            'SALT TEXT NOT NULL',
-            'HASHED TEXT'
+        columnsDesc = [
+            'user_id TEXT PRIMARY KEY',
+            'salt TEXT NOT NULL',
+            'hashed_password TEXT'
         ]
+        data = dict()
+        data["dbName"] = db_name
+        data["tableName"] = table_name
+        data["columnDesc"] = columnsDesc
+        await dbOperationHandler(None,None,data,"create_new_db")
 
-        create_table(table_name, columns)
     except Exception as ex:
         print("[password][create]",ex)
 
-async def updatePasswordDB(userId, salt, hashedPassword):
-    try:
-        create()
-        # Example usage
+
+async def __insertDataInPasswordTable(dicu):
+    try :
+        db_name = DB_NAME
         table_name = 'Passwords'
-        # fields = ['field1', 'field2', 'field3']
-        fields = [userId,salt, hashedPassword]
-        # conditions = {'category': 'books', 'price': 10}
-        conditions = {}
+        details = {}
+        keys = []
+        values = []
 
-        query = f"INSERT INTO {table_name} VALUES ({', '.join(['?' for _ in range(len(fields))])})"
+        for k,v in dicu.items():
+            keys.append(k)
+            values.append(v)
+        details["keys"] = keys
+        details["values"] = values
 
+        data = dict()
+        data["dbName"] = db_name
+        data["tableName"] = table_name
+        data["details"] = details
 
-        # if conditions :
-        #     # Construct the query string
-        #     query = f"SELECT {', '.join(fields)} FROM {table_name} WHERE "
-        #     query += ' AND '.join(f"{key} = ?" for key in conditions)
-        # else :
-        #     query = f"SELECT {', '.join(fields)} FROM {table_name}"
-
-
-        # Create the parameter tuple
-        # params = tuple(conditions.values())
-
-        results = execute_dynamic_query(query, fields)
-
-        # Process the results
-        for row in results:
-            print(row)
-
+        await dbOperationHandler(None,None,data,"insert_row")
 
 
     except Exception as ex :
-        print("[password][updatePasswordDB]",ex)
+        print("[password][__insertDataInPasswordTable]",ex)
+
+
 
     
 
 
-async def generate_salt(length):
+async def __generate_salt(length):
     characters = string.ascii_letters + string.digits + string.punctuation
     random_string = ''.join(random.choice(characters) for _ in range(length))
     return random_string
 
 
-async def generate_hash(string1, string2):
+async def __generate_hash(string1, string2):
     concatenated_string = string1 + string2
     hash_object = hashlib.sha256()
 

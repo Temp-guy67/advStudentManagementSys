@@ -16,6 +16,8 @@ DEPT="dept"
 ROLE="role"
 CLASS="class"
 ACCESS_LEVEL="access_level"
+SESSION_ID="session_id"
+LAST_UPDATED_TIME="last_updated_time"
 
 
 DEPTCODE={"EE":"16","CS":"11"}

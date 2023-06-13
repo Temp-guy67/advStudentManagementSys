@@ -1,5 +1,5 @@
 from datetime import datetime
-from Commons.constants import DEPTCODE,COLLEGE_PREFIX,ROLE,DEPT,ID,USER_ID,CLASS,USERROLE
+from Commons.constants import DEPTCODE,COLLEGE_PREFIX,ROLE,DEPT,ID,USER_ID,CLASS,USERROLE,LAST_UPDATED_TIME
 import time,random
 from FireabaseDB.firebase_get import getLast
 from SQLDB.accountDB import createAccount
@@ -34,6 +34,7 @@ async def signUpSupports(dicu):
         dicu[CLASS] = classOFStudent
         dicu[ID] = id
         dicu[USER_ID] = userId
+        dicu[LAST_UPDATED_TIME] = str(current_time_millis)
         await createAccount(dicu)
         return dicu
     

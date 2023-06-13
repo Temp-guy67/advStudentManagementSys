@@ -13,6 +13,7 @@ class AccountObejcts:
         self.inboxId = None 
 
 def accountObjectCreater(dicu):
+    print(" ACCOUNT CREATER ," , dicu)
     accountObject = {}
     if dicu.get(EMAIL):
         accountObject[EMAIL] = dicu[EMAIL]
@@ -24,8 +25,8 @@ def accountObjectCreater(dicu):
         accountObject[ROLE] = dicu[ROLE]
     if dicu.get(USER_ID):
         accountObject[USER_ID] = dicu[USER_ID]
-
     if dicu.get(VERIFIED):
-        accountObject[VERIFIED] = dicu[VERIFIED]
+        accountObject[VERIFIED] = int(dicu[VERIFIED])
     return accountObject
         
+# def passwordObjectCreater(dicu):

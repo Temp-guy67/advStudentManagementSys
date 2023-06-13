@@ -1,0 +1,44 @@
+root - ERROR - [DBOperations][Exception in __insertIntoTableTemplate] table Passwords has no column named user_id
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 67, in __insertIntoTable
+    cursor.execute(query, values)
+sqlite3.OperationalError: table Passwords has no column named user_id
+root - ERROR - [DBOperations][Exception in __insertIntoTableTemplate] table Passwords has no column named user_id
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 67, in __insertIntoTable
+    cursor.execute(query, values)
+sqlite3.OperationalError: table Passwords has no column named user_id
+2023-06-13 15:56:28,752 - root - ERROR - [DBOperations][Exception in __insertIntoTableTemplate] table Passwords has no column named user_id
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 67, in __insertIntoTable
+    cursor.execute(query, values)
+sqlite3.OperationalError: table Passwords has no column named user_id
+2023-06-13 15:58:11,889 - root - ERROR - [DBOperations][Exception in __insertIntoTableTemplate] table Passwords has no column named user_id
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 67, in __insertIntoTable
+    cursor.execute(query, values)
+sqlite3.OperationalError: table Passwords has no column named user_id
+2023-06-13 19:26:33,050 - root - INFO - Logger Inititated
+2023-06-13 19:26:56,869 - root - INFO - Logger Inititated
+2023-06-13 19:27:24,213 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-13 19:27:24,361 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-13 19:27:24,471 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-13 19:27:26,140 - root - INFO - [accountDB][createAccount][Table Created]
+2023-06-13 19:27:26,147 - root - INFO - [accountDB][createAccount][Data Inserted in Account Table]
+2023-06-13 19:27:26,157 - root - ERROR - [DBOperations][Exception in __insertIntoTableTemplate] table Passwords has no column named user_id
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 67, in __insertIntoTable
+    cursor.execute(query, values)
+sqlite3.OperationalError: table Passwords has no column named user_id
+2023-06-13 19:27:26,158 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
+2023-06-13 19:30:34,843 - root - INFO - Logger Inititated
+2023-06-13 19:32:09,205 - root - INFO - Logger Inititated
+2023-06-13 19:32:11,541 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-13 19:32:11,549 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-13 19:32:11,653 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-13 19:32:12,023 - root - INFO - [accountDB][createAccount][Table Created]
+2023-06-13 19:32:12,028 - root - INFO - [accountDB][createAccount][Data Inserted in Account Table]
+2023-06-13 19:32:12,035 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
+2023-06-13 19:37:42,931 - root - INFO - Logger Inititated
+2023-06-13 19:38:58,770 - root - INFO - Logger Inititated
+2023-06-13 19:42:27,681 - root - INFO - Logger Inititated
