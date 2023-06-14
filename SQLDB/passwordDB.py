@@ -14,7 +14,7 @@ async def savePassword(data):
         hashedPassword = await __generate_hash(password, salt)
 
         dicu = dict()
-        dicu["id"] = userId
+        dicu["user_id"] = userId
         dicu["salt"] = salt
         dicu["hashed_password"] = hashedPassword
         await __insertDataInPasswordTable(dicu)

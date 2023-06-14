@@ -48,6 +48,7 @@ async def __insertDataInAccountTable(data):
     details = {}
     keys = []
     values = []
+    print(" DATA in Account Creation : " , data)
     for k,v in data:
         keys.append(k)
         values.append(v)

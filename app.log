@@ -42,3 +42,11 @@ sqlite3.OperationalError: table Passwords has no column named user_id
 2023-06-13 19:37:42,931 - root - INFO - Logger Inititated
 2023-06-13 19:38:58,770 - root - INFO - Logger Inititated
 2023-06-13 19:42:27,681 - root - INFO - Logger Inititated
+2023-06-14 18:17:00,936 - root - INFO - Logger Inititated
+2023-06-14 18:20:27,722 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-14 18:20:27,743 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-14 18:20:27,862 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-14 18:20:28,263 - root - INFO - [accountDB][createAccount][Table Created]
+2023-06-14 18:20:28,268 - root - INFO - [accountDB][createAccount][Data Inserted in Account Table]
+2023-06-14 18:20:28,281 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
+2023-06-14 18:31:15,333 - root - INFO - Logger Inititated
