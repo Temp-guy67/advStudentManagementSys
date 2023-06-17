@@ -1,11 +1,11 @@
-from datetime import datetime
+import datetime
 from Commons.constants import DEPTCODE,COLLEGE_PREFIX,ROLE,DEPT,ID,USER_ID,CLASS,USERROLE,LAST_UPDATED_TIME
 import time,random
 from FireabaseDB.firebase_get import getLast
 from SQLDB.accountDB import createAccount
 import logging
 
-
+# File Name : generateSupportFields
 
 async def signUpSupports(dicu):
     try:
@@ -14,8 +14,8 @@ async def signUpSupports(dicu):
 
         role = str(role)
 
-        current_date = datetime.now().date()
-        yearExtension = str(current_date)[2:4]
+        currentDateTime = datetime.datetime.now()
+        yearExtension = str(currentDateTime.year)
 
         classOFStudent = dept + yearExtension
         subjectCode = DEPTCODE[dept]
@@ -34,10 +34,10 @@ async def signUpSupports(dicu):
         dicu[CLASS] = classOFStudent
         dicu[ID] = id
         dicu[USER_ID] = userId
-        dicu[LAST_UPDATED_TIME] = str(current_time_millis)
+        dicu[LAST_UPDATED_TIME] = str(currentDateTime)
+        logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
         await createAccount(dicu)
         return dicu
     
     except Exception as e :
         logging.exception("[generateSupportFields][Exception in signUpSupports] %s", str(e))
-    return 

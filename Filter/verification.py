@@ -9,12 +9,12 @@ async def verificationHandler():
 
 
 
-async def loginHandler():
+async def loginHandler(user_data):
     try :
         pass
 
     except Exception as e :
-        logging.exception("[verification][Exception in loginHandler]  %s", str(e))
+        logging.exception("[verification][Exception in loginHandler]  %s", str(e),"[UserData]",user_data)
 
 
 
@@ -29,15 +29,11 @@ async def signupHandler(user_data):
         dicu[ROLE] = user_data.get("role")
         dicu[DEPT]  = user_data.get("dept")
         # print(" DICU in signupHandler",dicu)
+
         await signUpSupports(dicu)
 
-        return "Success"
-
     except Exception as e :
-        logging.exception("[verification][Exception in signupHandler]  %s", str(e))
-        # print("",e)
-
-
+        logging.exception("[verification][Exception in signupHandler]  %s", str(e),"[UserData]",user_data)
     
 
 

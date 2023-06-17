@@ -7,7 +7,7 @@ DB_NAME="DBFiles/Passwords.db"
 
 async def savePassword(data):
     try:
-        await __createPasswordTableInDB()
+        # await __createPasswordTableInDB()
         userId = data[USER_ID]
         password = data[PASSWORD]
         salt = await __generate_salt(10)
@@ -27,7 +27,7 @@ async def __createPasswordTableInDB():
         db_name = DB_NAME
         table_name = 'Passwords'
         columnsDesc = [
-            'user_id TEXT PRIMARY KEY',
+            'user_id TEXT PRIMARY KEY UNIQUE',
             'salt TEXT NOT NULL',
             'hashed_password TEXT'
         ]

@@ -11,12 +11,11 @@ DB_NAME="DBFiles/Accounts.db"
 async def createAccount(dicu):
 
     try :
-        await __createAccountTableInDB()
+        # await __createAccountTableInDB()
         logging.info("[accountDB][createAccount][Table Created]")
         obj = accountObjectCreater(dicu)
         await __insertDataInAccountTable(obj.items())
         logging.info("[accountDB][createAccount][Data Inserted in Account Table]")
-        print("[accountDB][createAccount][Data Inserted in Account Table]")
         await savePassword(dicu)
         print("[accountDB][createAccount][Password Saved in Password Table]")
         logging.info("[accountDB][createAccount][Password Saved in Password Table]")
@@ -31,7 +30,7 @@ async def __createAccountTableInDB():
     # db_name = "Accounts.db"
     db_name = DB_NAME
     table_name = "AccountsData"
-    columnsDesc = ["user_id TEXT", "email TEXT","phone TEXT" , "id TEXT","verified INTEGER", "role INTEGER","dob TEXT","access_level INTEGER", "inbox_id TEXT" , "last_updated_time TEXT" ]
+    columnsDesc = ["user_id TEXT UNIQUE", "email TEXT UNIQUE","phone TEXT UNIQUE" , "id TEXT UNIQUE","verified INTEGER", "role INTEGER","dob TEXT","access_level INTEGER", "inbox_id TEXT" , "last_updated_time TEXT" ]
 
     data = dict()
     data["dbName"] = db_name
