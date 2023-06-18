@@ -21,6 +21,12 @@ async def dbOperationHandler(sessionId,userId,data,opr):
             dbName = data["dbName"]
             accountData = data["details"]
             await __insertIntoTable(dbName,tableName,accountData)
+        
+        elif opr == "read_data":
+            tableName = data["tableName"]
+            dbName = data["dbName"]
+            accountData = data["details"]
+            __readDataFromTable(db_name,table_name,columns, conditions,sign)
 
         elif opr == "delete" :
             pass
