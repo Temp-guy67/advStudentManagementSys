@@ -23,7 +23,7 @@ async def login(request : Request):
     try:
         temp = await loginHandler(user_data)
         response = JSONResponse(content=temp)
-        pass
+        return response
     except Exception as e :
         logging.exception("[main][Exception in login] %s", str(e))
 
@@ -31,12 +31,15 @@ async def login(request : Request):
 @app.get("/public/signup")
 async def signup(request : Request):
     user_data = await request.json()
-    logging.info("[main][signup][Request Landed] ", user_data)
+    logging.info("[main][signup][Request Landed] %s", str(user_data))
     try :
         temp = await signupHandler(user_data)
         response = JSONResponse(content=temp)
+        return response
     except Exception as e :
         logging.exception("[main][Exception in signup] %s", str(e))
+
+
 
 # private now
 

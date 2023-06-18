@@ -46,3 +46,19 @@ Traceback (most recent call last):
 sqlite3.IntegrityError: UNIQUE constraint failed: AccountsData.id
 2023-06-17 14:33:58,540 - root - INFO - [accountDB][createAccount][Data Inserted in Account Table]
 2023-06-17 14:33:58,546 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
+2023-06-18 09:54:31,307 - root - INFO - Logger Inititated
+2023-06-18 09:57:41,959 - root - INFO - Logger Inititated for this session 
+2023-06-18 09:58:24,486 - root - INFO - Logger Inititated for this session 
+2023-06-18 09:59:44,045 - root - INFO - Logger Inititated for this session 
+2023-06-18 10:01:06,511 - root - INFO - Logger Inititated for this session 
+2023-06-18 10:04:45,612 - root - INFO - Logger Inititated for this session 
+2023-06-18 10:10:53,944 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:03:14,744 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:03:37,520 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:08:31,924 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:13:10,497 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:14:46,489 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:14:59,922 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:16:05,408 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:16:32,493 - root - INFO - Logger Inititated for this session 
+2023-06-18 11:18:27,400 - root - INFO - Logger Inititated for this session 

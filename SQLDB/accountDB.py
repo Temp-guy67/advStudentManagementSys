@@ -11,14 +11,17 @@ DB_NAME="DBFiles/Accounts.db"
 async def createAccount(dicu):
 
     try :
+        # test code for create account table 
         # await __createAccountTableInDB()
-        logging.info("[accountDB][createAccount][Table Created]")
+        # logging.info("[accountDB][createAccount][Table Created]")
+
         obj = accountObjectCreater(dicu)
         await __insertDataInAccountTable(obj.items())
         logging.info("[accountDB][createAccount][Data Inserted in Account Table]")
+
         await savePassword(dicu)
-        print("[accountDB][createAccount][Password Saved in Password Table]")
         logging.info("[accountDB][createAccount][Password Saved in Password Table]")
+
         # createStduentAccount(dicu)
 
         return "Suces full account created"
@@ -40,14 +43,32 @@ async def __createAccountTableInDB():
     
 
 async def __insertDataInAccountTable(data):
-    print(" data revceived in __insert ",data)
     db_name = DB_NAME
     table_name = "AccountsData"
 
     details = {}
     keys = []
     values = []
-    print(" DATA in Account Creation : " , data)
+    for k,v in data:
+        keys.append(k)
+        values.append(v)
+    details["keys"] = keys
+    details["values"] = values
+
+    data = dict()
+    data["dbName"] = db_name
+    data["tableName"] = table_name
+    data["details"] = details
+    await dbOperationHandler(None,None,data,"insert_row")
+
+
+async def __readDataInAccountTable(data):
+    db_name = DB_NAME
+    table_name = "AccountsData"
+
+    details = {}
+    keys = []
+    values = []
     for k,v in data:
         keys.append(k)
         values.append(v)

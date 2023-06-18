@@ -37,7 +37,18 @@ async def signUpSupports(dicu):
         dicu[LAST_UPDATED_TIME] = str(currentDateTime)
         logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
         await createAccount(dicu)
-        return dicu
     
     except Exception as e :
         logging.exception("[generateSupportFields][Exception in signUpSupports] %s", str(e))
+
+
+async def loginSupports(dicu):
+    try:
+        role = dicu.get(ROLE)
+        dept = dicu.get(DEPT)
+
+        logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
+        await createAccount(dicu)
+    
+    except Exception as e :
+        logging.exception("[generateSupportFields][Exception in loginSupports] %s", str(e))

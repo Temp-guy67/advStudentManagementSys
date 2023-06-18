@@ -1,8 +1,6 @@
 import logging
 
-
 # Level We have  -> debug,info,warning,error,critical
-
 def configure_logging():
     logging.basicConfig(
         filename='app.log',
@@ -10,6 +8,5 @@ def configure_logging():
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     logging.getLogger().setLevel(logging.DEBUG)
-    logging.info("Logger Inititated")
-    print("Logger Inititated")
+    logging.info("Logger Inititated for this session ")
 
