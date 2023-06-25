@@ -1,9 +1,24 @@
 import random,string,sqlite3,hashlib
 from SQLDB.DBOperations import dbOperationHandler
-from Commons.constants import USER_ID,PASSWORD
+from Commons.constants import USER_ID,PASSWORD,SALT,HASHED_PASSWORD
 
 
 DB_NAME="DBFiles/Passwords.db"
+
+
+class PasswordObject:
+    def __init__(self,data) -> None:
+        self.userId = data['user_id']
+        self.salt = data['salt']
+        self.hashedPassword = data['hashed_password']
+        self.updatedTime = data['updated_time']
+        self.updatedBy = data['updated_by']
+
+    def getPasswordObjasDictionary(self):
+        data = dict()
+        data[]
+
+        
 
 async def savePassword(data):
     try:
@@ -29,7 +44,9 @@ async def __createPasswordTableInDB():
         columnsDesc = [
             'user_id TEXT PRIMARY KEY UNIQUE',
             'salt TEXT NOT NULL',
-            'hashed_password TEXT'
+            'hashed_password TEXT',
+            'last_updated_time TEXT',
+            'updated_by TEXT'
         ]
         data = dict()
         data["dbName"] = db_name

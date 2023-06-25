@@ -1,5 +1,4 @@
 import sqlite3,logging
-from DataObjects.entryObjects import accountObjectCreater
 from Commons.constants import USER_ID,SESSION_ID
 
 #FileName : DBOperations
@@ -19,14 +18,17 @@ async def dbOperationHandler(sessionId,userId,data,opr):
         elif opr == "insert_row" :
             tableName = data["tableName"]
             dbName = data["dbName"]
-            accountData = data["details"]
-            await __insertIntoTable(dbName,tableName,accountData)
+            keys = data["keys"]
+            vals = data["values"]
+            await __insertIntoTable(dbName,tableName,keys,vals)
         
         elif opr == "read_data":
             tableName = data["tableName"]
             dbName = data["dbName"]
-            accountData = data["details"]
-            __readDataFromTable(db_name,table_name,columns, conditions,sign)
+            columns = data["columns"]
+            conditions = data["conditions"]
+            dbData = await __readDataFromTable(dbName,tableName,columns, conditions)
+            return dbData
 
         elif opr == "delete" :
             pass
@@ -57,11 +59,9 @@ async def __createNewTable(db_name,table_name,columnsDesc):
 
 #To Insert a Row into a table
 # make columns and values and send it in data
-async def __insertIntoTable(db_name,table_name,data):
+async def __insertIntoTable(db_name,table_name,keys,values):
     try:
-        logging.info("[DBOperations][Data received in __insertIntoTableTemplate][db_name]",db_name,"[table_name]",table_name,"[Data]",data)
-        keys = data["keys"]
-        values = data["values"]
+        logging.info("[DBOperations][Data received in __insertIntoTableTemplate][db_name]",db_name,"[table_name]",table_name,"[Data]",keys)
 
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
@@ -73,29 +73,40 @@ async def __insertIntoTable(db_name,table_name,data):
             cursor.execute(query, values)
             conn.commit()
         conn.close()
-        logging.info("[DBOperations]__insertIntoTableTemplate][Data Inserted]",db_name,"[table_name]",table_name,"[Data]",data)
+        logging.info("[DBOperations]__insertIntoTableTemplate][Data Inserted]",db_name,"[table_name]",table_name,"[Data]",values)
     except Exception as ex :
         logging.exception("[DBOperations][Exception in __insertIntoTableTemplate] %s", str(ex))
 
 
 
-#To Read Data From a table
-async def __readDataFromTable(db_name,table_name,columns, conditions,sign):
+# To Read Data From a table
+# columns will be the arrays of column name
+# coditions will be the nested list feat [key,val,sign] ; individual coditions
+async def __readDataFromTable(db_name,table_name,columns, conditions):
     try:
-        logging.info("[DBOperations][Data received in __insertIntoTableTemplate][db_name]",db_name,"[table_name]",table_name,"[Data]")
+        print(" IN __readDataFromTable " , conditions)
+        logging.info("[DBOperations][Data received in __insertIntoTableTemplate][db_name]",db_name,"[table_name]",table_name,"[Data]",conditions)
         conn = sqlite3.connect(db_name)
         cursor = conn.cursor()
 
-        query = f"SELECT {', '.join(columns)} FROM {table_name} "
+        if columns:
+            select_columns = ', '.join(columns)
+        else:
+            select_columns = '*'
+
+        query = f"SELECT {select_columns} FROM {table_name} "
         if conditions :
             query += " WHERE "
-            query += ' AND '.join(f"{key} {sign} '{value}'" for key, value in conditions.items())
-            query += ")"
+            for k,v,s in conditions:
+                query += ' AND '.join(f"{key} {sign} '{value}'" for key, value ,sign in conditions)
+            
         query += ";"
-
-        cursor.execute(query, conditions)
+        logging.debug("[DBOperations][__insertIntoTableTemplate][TEST QUERY] %s ",str(query))
+        cursor.execute(query)
+        result = cursor.fetchall()
         conn.commit()
         conn.close()
+        return result
 
     except Exception as ex :
         logging.exception("[DBOperations][Exception in __readDataFromTableTemplate] %s", str(ex))

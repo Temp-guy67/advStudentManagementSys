@@ -2,6 +2,16 @@ import sqlite3
 from Commons.constants import USER_ID,ID,CLASS_OF_STUDENT,FNAME,LNAME,MNAME
 
 
+class RoleObject:
+    def __init__(self, data) -> None:
+        self.fName = data[FNAME]
+        self.mName = data[MNAME]
+        self.lName = data[LNAME]
+        self.dob = data[DOB]
+
+
+
+
 async def createStduentAccount(dicu):
     try:             
         classOfStudent = dicu.get(CLASS_OF_STUDENT)

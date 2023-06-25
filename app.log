@@ -1,64 +1,49 @@
-2023-06-15 19:11:13,474 - root - INFO - Logger Inititated
-2023-06-15 19:11:18,236 - root - INFO - Logger Inititated
-2023-06-15 19:11:21,688 - root - INFO - [main][signup][Request Landed] 
-2023-06-15 19:11:21,765 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
-2023-06-15 19:11:21,774 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
-2023-06-15 19:11:21,879 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
-2023-06-15 19:11:23,579 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'verified': '0', 'role': '3', 'dept': 'EE', 'class': 'EE23', 'id': '3490323161', 'user_id': 'ST_86_143845530', 'last_updated_time': '143845530'} 
-2023-06-16 12:32:21,512 - root - INFO - Logger Inititated
-2023-06-16 12:32:35,042 - root - INFO - [main][signup][Request Landed] 
-2023-06-16 12:32:35,043 - root - ERROR - [generateSupportFields][Exception in signUpSupports] type object 'datetime.datetime' has no attribute 'datetime'
-Traceback (most recent call last):
-  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Commons/generateSupportFields.py", line 17, in signUpSupports
-    currentDateTime = datetime.datetime.now()
-AttributeError: type object 'datetime.datetime' has no attribute 'datetime'
-2023-06-16 12:32:55,719 - root - INFO - Logger Inititated
-2023-06-16 12:32:57,578 - root - INFO - [main][signup][Request Landed] 
-2023-06-16 12:32:57,668 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
-2023-06-16 12:32:57,679 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
-2023-06-16 12:32:57,785 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
-2023-06-16 12:32:58,274 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'verified': '0', 'role': '3', 'dept': 'EE', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_61_154688643', 'last_updated_time': '2023-06-16 12:32:57.578570'} 
-2023-06-16 12:46:30,889 - root - INFO - Logger Inititated
-2023-06-16 12:47:10,246 - root - INFO - Logger Inititated
-2023-06-17 14:29:03,165 - root - INFO - Logger Inititated
-2023-06-17 14:31:01,707 - root - INFO - Logger Inititated
-2023-06-17 14:31:07,897 - root - INFO - [main][signup][Request Landed] 
-2023-06-17 14:31:38,053 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
-2023-06-17 14:31:38,073 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
-2023-06-17 14:31:38,186 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
-2023-06-17 14:31:38,566 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'verified': '0', 'role': '3', 'dept': 'EE', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_40_188004984', 'last_updated_time': '2023-06-17 14:31:07.898008'} 
-2023-06-17 14:31:38,583 - root - INFO - [accountDB][createAccount][Table Created]
-2023-06-17 14:31:38,588 - root - INFO - [accountDB][createAccount][Data Inserted in Account Table]
-2023-06-17 14:31:38,599 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
-2023-06-17 14:31:54,291 - root - INFO - Logger Inititated
-2023-06-17 14:33:17,193 - root - INFO - Logger Inititated
-2023-06-17 14:33:22,648 - root - INFO - Logger Inititated
-2023-06-17 14:33:27,985 - root - INFO - [main][signup][Request Landed] 
-2023-06-17 14:33:58,084 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
-2023-06-17 14:33:58,093 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
-2023-06-17 14:33:58,189 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
-2023-06-17 14:33:58,536 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'verified': '0', 'role': '3', 'dept': 'EE', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_55_188144953', 'last_updated_time': '2023-06-17 14:33:27.985352'} 
-2023-06-17 14:33:58,536 - root - INFO - [accountDB][createAccount][Table Created]
-2023-06-17 14:33:58,540 - root - ERROR - [DBOperations][Exception in __insertIntoTableTemplate] UNIQUE constraint failed: AccountsData.id
-Traceback (most recent call last):
-  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/SQLDB/DBOperations.py", line 67, in __insertIntoTable
-    cursor.execute(query, values)
-sqlite3.IntegrityError: UNIQUE constraint failed: AccountsData.id
-2023-06-17 14:33:58,540 - root - INFO - [accountDB][createAccount][Data Inserted in Account Table]
-2023-06-17 14:33:58,546 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
-2023-06-18 09:54:31,307 - root - INFO - Logger Inititated
-2023-06-18 09:57:41,959 - root - INFO - Logger Inititated for this session 
-2023-06-18 09:58:24,486 - root - INFO - Logger Inititated for this session 
-2023-06-18 09:59:44,045 - root - INFO - Logger Inititated for this session 
-2023-06-18 10:01:06,511 - root - INFO - Logger Inititated for this session 
-2023-06-18 10:04:45,612 - root - INFO - Logger Inititated for this session 
-2023-06-18 10:10:53,944 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:03:14,744 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:03:37,520 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:08:31,924 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:13:10,497 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:14:46,489 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:14:59,922 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:16:05,408 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:16:32,493 - root - INFO - Logger Inititated for this session 
-2023-06-18 11:18:27,400 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:10:18,385 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:10:28,808 - root - INFO - [main][signup][Request Landed] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ'}
+2023-06-23 18:10:28,902 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-23 18:10:28,917 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-23 18:10:29,041 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-23 18:10:29,629 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_41_160326322', 'last_updated_time': '2023-06-23 18:10:28.809347'} 
+2023-06-23 18:10:29,629 - root - INFO - [AccountObject][Constructer][Data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_41_160326322', 'last_updated_time': '2023-06-23 18:10:28.809347'}
+2023-06-23 18:11:32,898 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:11:44,847 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:11:47,961 - root - INFO - [main][signup][Request Landed] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ'}
+2023-06-23 18:11:48,062 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-23 18:11:48,072 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-23 18:11:48,198 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-23 18:11:48,652 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_57_160405345', 'last_updated_time': '2023-06-23 18:11:47.961463', 'verified': 0} 
+2023-06-23 18:11:48,652 - root - INFO - [AccountObject][Constructer][Data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_57_160405345', 'last_updated_time': '2023-06-23 18:11:47.961463', 'verified': 0}
+2023-06-23 18:11:48,652 - root - INFO - [AccountObject][Constructer][Object Created] 
+2023-06-23 18:12:36,445 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:12:51,478 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:12:53,123 - root - INFO - [main][signup][Request Landed] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ'}
+2023-06-23 18:12:53,203 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-23 18:12:53,211 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-23 18:12:53,320 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-23 18:12:54,940 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_22_160471633', 'last_updated_time': '2023-06-23 18:12:53.123970', 'verified': 0} 
+2023-06-23 18:12:54,940 - root - INFO - [AccountObject][Constructer][Data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_22_160471633', 'last_updated_time': '2023-06-23 18:12:53.123970', 'verified': 0}
+2023-06-23 18:12:54,940 - root - INFO - [AccountObject][Constructer][Object Created] 
+2023-06-23 18:13:42,647 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:13:45,207 - root - INFO - [main][signup][Request Landed] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ'}
+2023-06-23 18:13:45,295 - google.auth.transport.requests - DEBUG - Making request: POST https://oauth2.googleapis.com/token
+2023-06-23 18:13:45,304 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2023-06-23 18:13:45,430 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2023-06-23 18:13:46,929 - root - INFO - [generateSupportFields][signUpSupports][Completed user support data][data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_52_160523622', 'last_updated_time': '2023-06-23 18:13:45.207415', 'verified': 0} 
+2023-06-23 18:13:46,929 - root - INFO - [AccountObject][Constructer][Data] {'email': 'test@testmail.com', 'password': 'Test@123', 'phone': '12345678', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'class': 'EE2023', 'id': '349032023161', 'user_id': 'ST_52_160523622', 'last_updated_time': '2023-06-23 18:13:45.207415', 'verified': 0}
+2023-06-23 18:13:46,929 - root - INFO - [AccountObject][Constructer][Object Created] 
+2023-06-23 18:13:46,929 - root - INFO - [accountDB][createAccount][Password Saved in Password Table]
+2023-06-23 18:15:08,070 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:35:18,416 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:35:44,245 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:36:56,578 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:39:06,797 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:39:51,996 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:41:16,345 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:41:40,973 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:44:12,269 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:45:42,499 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:46:16,158 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:46:24,867 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:47:01,853 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:47:19,231 - root - INFO - Logger Inititated for this session 
+2023-06-23 18:48:47,260 - root - INFO - Logger Inititated for this session 

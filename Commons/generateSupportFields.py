@@ -1,14 +1,15 @@
 import datetime
-from Commons.constants import DEPTCODE,COLLEGE_PREFIX,ROLE,DEPT,ID,USER_ID,CLASS,USERROLE,LAST_UPDATED_TIME
+from Commons.constants import DEPTCODE,COLLEGE_PREFIX,ROLE,DEPT,ID,USER_ID,CLASS,USERROLE,LAST_UPDATED_TIME,VERIFIED
 import time,random
-from FireabaseDB.firebase_get import getLast
-from SQLDB.accountDB import createAccount
+from Databases.FireabaseDB.firebase_get import getLast
+# from SQLDB.accountDB import createAccount
 import logging
 
 # File Name : generateSupportFields
 
 async def signUpSupports(dicu):
     try:
+
         role = dicu.get(ROLE)
         dept = dicu.get(DEPT)
 
@@ -35,9 +36,8 @@ async def signUpSupports(dicu):
         dicu[ID] = id
         dicu[USER_ID] = userId
         dicu[LAST_UPDATED_TIME] = str(currentDateTime)
+        dicu[VERIFIED] = 0
         logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
-        await createAccount(dicu)
-    
     except Exception as e :
         logging.exception("[generateSupportFields][Exception in signUpSupports] %s", str(e))
 
@@ -48,7 +48,7 @@ async def loginSupports(dicu):
         dept = dicu.get(DEPT)
 
         logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
-        await createAccount(dicu)
+        # await createAccount(dicu)
     
     except Exception as e :
         logging.exception("[generateSupportFields][Exception in loginSupports] %s", str(e))
