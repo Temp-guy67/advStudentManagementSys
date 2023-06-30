@@ -19,6 +19,9 @@ ACCESS_LEVEL="access_level"
 SESSION_ID="session_id"
 LAST_UPDATED_TIME="last_updated_time"
 DOB="dob"
+CLIENT_IP="client_ip"
+SALT="salt"
+HASHED_PASSWORD="hashed_password"
 
 
 DEPTCODE={"EE":"16","CS":"11"}

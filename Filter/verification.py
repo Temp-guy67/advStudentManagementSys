@@ -1,6 +1,8 @@
 #verification login and signup
-from Commons.constants import ROLE,EMAIL,PASSWORD,PHONE,ROLE,DEPT,FNAME,LNAME,MNAME,DOB
+from Commons.constants import ROLE,EMAIL,PASSWORD,PHONE,ROLE,DEPT,FNAME,LNAME,MNAME,DOB,USER_AGENT,CLIENT_IP
 from Commons.generateSupportFields import signUpSupports,loginSupports
+from Databases.SQLDB.commonDBhandler import createAccountForNewUser
+from Databases.SQLDB.accountDB import ifAccountDataExists
 import logging
 
 
@@ -39,6 +41,8 @@ async def forgotPassword(user_data):
     except Exception as e :
         logging.exception("[verification][Exception in signupHandler]  %s", str(e),"[UserData]",user_data)
 
+
+
 async def signupHandler(user_data):
     try:
         email = user_data.get("email") 
@@ -50,10 +54,12 @@ async def signupHandler(user_data):
         mname = user_data.get("mname")
         lname = user_data.get("lname")
         dob = user_data.get("dob")
+        userAgent = user_data.get("user_agent")
+        clientIp = user_data.get("client_ip")
         
 
         if not email or not phone or not password or not role or not dept or not fname:
-            return "Not Successful"
+            return -1
         
         dicu = {}
         dicu[EMAIL] = email
@@ -65,11 +71,24 @@ async def signupHandler(user_data):
         dicu[MNAME] = mname 
         dicu[LNAME] = lname 
         dicu[DOB] = dob
-        
-        await signUpSupports(user_data)
+        dicu[USER_AGENT] = userAgent
+        dicu[CLIENT_IP] = clientIp
+
+        #check if exist or not
+        check = await ifAccountDataExists(email,phone)
+        responseObj = None
+        if check and check["result"] == -1:
+            res = await signUpSupports(dicu)
+            if res:
+                responseObj = await createAccountForNewUser(res)
+        elif check and check["result"] == 1 :
+            logging.exception("[verification][User {} Cannot be added ][reason {} already existed]".format(fname,check["reason"]))
+            responseObj = -1
+        return responseObj
+
     except Exception as e :
-        logging.exception("[verification][Exception in signupHandler]  %s", str(e),"[UserData]",user_data)
-    
+        logging.exception("[verification][Exception in signupHandler][UserData]{} [Exception] {}".format(user_data,e))
+    return None
 
 
 

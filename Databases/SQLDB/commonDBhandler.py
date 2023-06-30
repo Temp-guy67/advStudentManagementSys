@@ -1,11 +1,18 @@
 import logging
 from Databases.SQLDB.accountDB import AccountObject,createAccountForUser 
-from Databases.SQLDB.passwordDB import 
+# from Databases.SQLDB.passwordDB import passwordObject
+from ResponseObject.response import ResponseObject
 
 
 
-async def createAccountForUser(dicu):
+async def createAccountForNewUser(dicu):
         accountObj = AccountObject(dicu)
         res = await createAccountForUser(accountObj)
+        return "res in work " ,res 
 
-        passwordObj = passwordObject(dicu)
+                
+        # if res > 0 :
+            # passwordObj = passwordObject(dicu)
+            
+        
+

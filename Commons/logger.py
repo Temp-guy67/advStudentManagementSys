@@ -4,7 +4,7 @@ import logging
 def configure_logging():
     logging.basicConfig(
         filename='app.log',
-        filemode='a',
+        filemode='w',
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     logging.getLogger().setLevel(logging.DEBUG)

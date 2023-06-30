@@ -6,122 +6,88 @@ from Commons.constants import EMAIL,PHONE,ROLE,USER_ID,ID,VERIFIED,CLASS,LAST_UP
 #FilenName : accountDB
 # .mode box to show data in bOX
 
-DB_NAME="DBFiles/Accounts.db"
+DB_NAME="Databases/SQLDB/DBFiles/Accounts.db"
 TABLE_NAME="AccountsData"
 
-
 class AccountObject :
+    keys = []
+    vals = []
     def __init__(self,data):
-        logging.info("[AccountObject][Constructer][Data] %s",str(data))
+        logging.info("[AccountObject][Constructer][Data] {} ".format(data))
         try :
-            self.role = data[ROLE]
-            self.email = data[EMAIL]
-            self.phone = data[PHONE]
-            self.userId = data[USER_ID]
-            self.id = data[ID]
-            self.cls = data[CLASS]
-            self.verified = data[VERIFIED]
-            self.lastUpdatedTime = data[LAST_UPDATED_TIME]
-            logging.info("[AccountObject][Constructer][Object Created] ")
+            role = data[ROLE]
+            if role:
+                self.keys.append(ROLE)
+                self.vals.append(role)
+            
+            email = data[EMAIL]
+            if email:
+                self.keys.append(EMAIL)
+                self.vals.append(email)
+
+            phone = data[PHONE]
+            if phone:
+                self.keys.append(PHONE)
+                self.vals.append(phone)
+
+            userId = data[USER_ID]
+            if userId:
+                self.keys.append(USER_ID)
+                self.vals.append(userId)
+
+            id = data[ID]
+            if id:
+                self.keys.append(ID)
+                self.vals.append(id)
+
+            verified = data[VERIFIED]
+            if verified:
+                self.keys.append(VERIFIED)
+                self.vals.append(verified)
+
+            lastUpdatedTime = data[LAST_UPDATED_TIME]
+            if lastUpdatedTime:
+                self.keys.append(LAST_UPDATED_TIME)
+                self.vals.append(lastUpdatedTime)
 
         except Exception as ex :
-            logging.error("[SQLDB][AccountObject][Exception in the Constructor]",ex)
+            logging.error("[SQLDB][AccountObject][Exception in the Constructor] {} ".format(ex))
+
 
     def getDataAsDictionary(self):
         dicu = dict()
-        keys = []
-        vals = []
-
-        role = self.role
-        if role:
-            keys.append(ROLE)
-            vals.append(role)
-        
-        email = self.email
-        if email:
-            keys.append(EMAIL)
-            vals.append(email)
-
-        phone = self.phone
-        if phone:
-            keys.append(PHONE)
-            vals.append(phone)
-
-        userId = self.userId
-        if userId:
-            keys.append(USER_ID)
-            vals.append(userId)
-
-        id = self.id
-        if id:
-            keys.append(ID)
-            vals.append(id)
-
-        cls = self.cls
-        if cls:
-            keys.append(CLASS)
-            vals.append(cls)
-
-        verified = self.verified
-        if verified:
-            keys.append(VERIFIED)
-            vals.append(verified)
-
-        lastUpdatedTime = self.lastUpdatedTime
-        if lastUpdatedTime:
-            keys.append(LAST_UPDATED_TIME)
-            vals.append(lastUpdatedTime)
-
-        
-        dicu["keys"] = keys
-        dicu["values"] = vals
-
+        dicu["keys"] = self.keys
+        dicu["values"] = self.vals
         return dicu
 
 
 async def createAccountTable():
-    await __createAccountTableInDB()
-    logging.info("[accountDB][createAccount][Table Created]")
-
+    res = await __createAccountTableInDB()
+    if res == 1 :
+        logging.info("[accountDB][createAccount][Table Created]")
+    else :
+        logging.info("[accountDB][createAccount][Table NOT Created]")
 
 
 async def createAccountForUser(accountObj):
 
     try :
-        data = accountObj.getDataAsDictionary()
-    
-        currentUserId = data.get("user_id")
-        print(" data user Id ",currentUserId)
-        
-        # chck if the data already existed or not
-        res = await __ifAccountDataExists(accountObj)
-
-        response = None
-
-        if not res: 
-            await __insertDataInAccountTable(data)
-            logging.info("[accountDB][createAccount][Data Inserted in Account Table]")
-            response = ResponseObject(ResponseObject.SUCCESS, "Account Has been Created Successfully", "1")
-        else:
-            logging.info("[accountDB][createAccount][Data already existed in Account Table]")
-            response = ResponseObject(ResponseObject.ERROR, "Data Already Existed", "-1")
-        
-        
-        return response
-
+        # await createAccountTable()
+        dataInKeyValuePair = accountObj.getDataAsDictionary()
+        return await __insertDataInAccountTable(dataInKeyValuePair)
         
     except Exception as ex :
-        print("[AccountDB][createAccount][Got Exception] : ",ex)
+        logging.error("[AccountDB][createAccountForUser][Got Exception] {} ".format(ex))
 
 
 async def __createAccountTableInDB():
-    columnsDesc = ["user_id TEXT UNIQUE", "email TEXT UNIQUE","phone TEXT UNIQUE" , "id TEXT UNIQUE","verified INTEGER", "role INTEGER","dob TEXT","access_level INTEGER", "inbox_id TEXT" , "last_updated_time TEXT" ]
+    columnsDesc = ["user_id TEXT UNIQUE", "email TEXT UNIQUE","phone TEXT UNIQUE" , "id TEXT UNIQUE","verified INTEGER", "role INTEGER","dob TEXT","access_level INTEGER", "inbox_id TEXT" , "last_updated_time TEXT"]
 
     data = dict()
     data["dbName"] = DB_NAME
     data["tableName"] = TABLE_NAME
     data["columnDesc"] = columnsDesc
-    await dbOperationHandler(None,None,data,"create_new_db")
+    return await dbOperationHandler(None,None,data,"create_new_db")
     
 
 async def __insertDataInAccountTable(data):
@@ -140,27 +106,40 @@ async def readDataInAccountTable(dicu):
 
     return await dbOperationHandler(None,None,data,"read_data")
 
-async def __ifAccountDataExists(datas):
-    email = datas.get("email")
-    phone = datas.get("phone")
-    arr = [["email",email,"="] , ["phone",phone,"="]]
-    table_name = "AccountsData"
-    res = []
-    for e in arr :
-        data = dict()
-        data["columns"] = None
-        data["conditions"] = [e]
-            
-        data["dbName"] = DB_NAME
-        data["tableName"] = table_name
-        temp =  await dbOperationHandler(None,None,data,"read_data")
-        if temp :
-            res += e
-            return res
-    return res
 
+async def ifAccountDataExists(email,phone):
+    res = {}
+
+    try:
+        arr = [["email",email,"="] , ["phone",phone,"="]]
+        table_name = "AccountsData"
+    
+        for e in arr :
+            data = dict()
+            data["columns"] = None
+            data["conditions"] = [e]
+                
+            data["dbName"] = DB_NAME
+            data["tableName"] = table_name
+            temp =  await dbOperationHandler(None,None,data,"read_data")
+            if temp :
+                res["result"] = 1
+                res["reason"] = e[0]
+                return res
+        res["result"] = -1
+        res["reason"] = None
+    except Exception as ex :
+        logging.error("[AccountDB][ifAccountDataExists][Got Exception] {} ".format(ex))
+
+    return res
 
 
 
 async def deleteFailedSingUpData(userId):
     pass
+
+
+
+    
+    
+    

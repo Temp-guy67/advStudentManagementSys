@@ -9,7 +9,6 @@ import logging
 
 async def signUpSupports(dicu):
     try:
-
         role = dicu.get(ROLE)
         dept = dicu.get(DEPT)
 
@@ -37,9 +36,12 @@ async def signUpSupports(dicu):
         dicu[USER_ID] = userId
         dicu[LAST_UPDATED_TIME] = str(currentDateTime)
         dicu[VERIFIED] = 0
-        logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
+
+        logging.info("[generateSupportFields][signUpSupports][Completed user support data][data]  {}".format(dicu))
+        return dicu
     except Exception as e :
-        logging.exception("[generateSupportFields][Exception in signUpSupports] %s", str(e))
+        logging.exception("[generateSupportFields][Exception in signUpSupports]  {}".format(e))
+        return None
 
 
 async def loginSupports(dicu):

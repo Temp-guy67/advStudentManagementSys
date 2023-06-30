@@ -1,10 +1,8 @@
-import random,string,sqlite3,hashlib
-from SQLDB.DBOperations import dbOperationHandler
+import random,string,hashlib
+from Databases.SQLDB.DBOperations import dbOperationHandler
 from Commons.constants import USER_ID,PASSWORD,SALT,HASHED_PASSWORD
 
-
-DB_NAME="DBFiles/Passwords.db"
-
+DB_NAME="Databases/SQLDB/DBFiles/Passwords.db"
 
 class PasswordObject:
     def __init__(self,data) -> None:
@@ -16,7 +14,7 @@ class PasswordObject:
 
     def getPasswordObjasDictionary(self):
         data = dict()
-        data[]
+        # data[]
 
         
 
@@ -33,6 +31,7 @@ async def savePassword(data):
         dicu["salt"] = salt
         dicu["hashed_password"] = hashedPassword
         await __insertDataInPasswordTable(dicu)
+        
     except Exception as ex:
         print("[password][savePassword]",ex)
 

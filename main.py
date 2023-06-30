@@ -18,26 +18,33 @@ def root():
 
 @app.get("/public/login")
 async def login(request : Request):
-    user_data = await request.json()
-    logging.info("[main][login][Request Landed] %s ", str(user_data))
     try:
+        user_data = await request.json()
+        logging.info("[main][login][User Data Received] {}".format(user_data))
         temp = await loginHandler(user_data)
         response = JSONResponse(content=temp)
         return response
     except Exception as e :
-        logging.exception("[main][Exception in login] %s", str(e))
+        logging.exception("[main][Exception in login] {} ".format(e))
 
 
 @app.get("/public/signup")
 async def signup(request : Request):
-    user_data = await request.json()
-    logging.info("[main][signup][Request Landed] %s", str(user_data))
     try :
+        user_data = await request.json()
+        client_ip = request.client.host
+        user_agent = request.headers.get("user-agent")
+
+        user_data["user_agent"] = user_agent
+        user_data["client_ip"] = client_ip
+        logging.info("[main][signup][User Data Received] {}".format(user_data))
+
         temp = await signupHandler(user_data)
         response = JSONResponse(content=temp)
+
         return response
     except Exception as e :
-        logging.exception("[main][Exception in signup] %s", str(e))
+        logging.exception("[main][Exception in signup] {} ".format(e))
 
 
 
