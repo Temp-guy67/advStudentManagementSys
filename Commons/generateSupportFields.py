@@ -1,16 +1,17 @@
 import datetime
-from Commons.constants import DEPTCODE,COLLEGE_PREFIX,ROLE,DEPT,ID,USER_ID,CLASS,USERROLE,LAST_UPDATED_TIME,VERIFIED
+from Commons.constants import CommonConstants,TypeClassifications
 import time,random
 from Databases.FireabaseDB.firebase_get import getLast
 # from SQLDB.accountDB import createAccount
+from Databases.SQLDB.commonRulesDB import Conf
 import logging
 
 # File Name : generateSupportFields
 
 async def signUpSupports(dicu):
     try:
-        role = dicu.get(ROLE)
-        dept = dicu.get(DEPT)
+        role = dicu.get(CommonConstants.ROLE)
+        dept = dicu.get(CommonConstants.DEPT)
 
         role = str(role)
 
@@ -18,24 +19,24 @@ async def signUpSupports(dicu):
         yearExtension = str(currentDateTime.year)
 
         classOFStudent = dept + yearExtension
-        subjectCode = DEPTCODE[dept]
+        subjectCode = TypeClassifications.DEPTCODE[dept]
         # 16 EE23 23 2023-06-01
 
-        temp = await getLast()
-        last = temp[role]
+        confObj = Conf()
+        last = await confObj.getLast(int(role))
 
-        id = COLLEGE_PREFIX + role + str(yearExtension) + subjectCode + str(last)
+        id = CommonConstants.COLLEGE_PREFIX + role + str(yearExtension) + subjectCode + str(last)
         # 3490323161
 
         current_time_millis = int(time.perf_counter() * 1000)
         random_int = random.randint(11, 99)
-        userId = USERROLE.get(role) + "_" + str(random_int) + "_" + str(current_time_millis)
+        userId = TypeClassifications.USERROLE.get(role) + "_" + str(random_int) + "_" + str(current_time_millis)
 
-        dicu[CLASS] = classOFStudent
-        dicu[ID] = id
-        dicu[USER_ID] = userId
-        dicu[LAST_UPDATED_TIME] = str(currentDateTime)
-        dicu[VERIFIED] = 0
+        dicu[CommonConstants.CLASS] = classOFStudent
+        dicu[CommonConstants.ID] = id
+        dicu[CommonConstants.USER_ID] = userId
+        dicu[CommonConstants.LAST_UPDATED_TIME] = str(currentDateTime)
+        dicu[CommonConstants.VERIFIED] = 0
 
         logging.info("[generateSupportFields][signUpSupports][Completed user support data][data]  {}".format(dicu))
         return dicu
@@ -43,14 +44,3 @@ async def signUpSupports(dicu):
         logging.exception("[generateSupportFields][Exception in signUpSupports]  {}".format(e))
         return None
 
-
-async def loginSupports(dicu):
-    try:
-        role = dicu.get(ROLE)
-        dept = dicu.get(DEPT)
-
-        logging.info("[generateSupportFields][signUpSupports][Completed user support data][data] %s ",str(dicu))
-        # await createAccount(dicu)
-    
-    except Exception as e :
-        logging.exception("[generateSupportFields][Exception in loginSupports] %s", str(e))

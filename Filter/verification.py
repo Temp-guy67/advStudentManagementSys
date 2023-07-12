@@ -1,8 +1,9 @@
 #verification login and signup
-from Commons.constants import ROLE,EMAIL,PASSWORD,PHONE,ROLE,DEPT,FNAME,LNAME,MNAME,DOB,USER_AGENT,CLIENT_IP
-from Commons.generateSupportFields import signUpSupports,loginSupports
+from Commons.constants import CommonConstants,SessionConstants
+from Commons.generateSupportFields import signUpSupports
 from Databases.SQLDB.commonDBhandler import createAccountForNewUser
 from Databases.SQLDB.accountDB import ifAccountDataExists
+from Filter.sessionControllers import sessionLogin
 import logging
 
 
@@ -14,17 +15,21 @@ async def verificationHandler():
 async def loginHandler(user_data):
     try :
         dicu = {}
-        phoneSignIn = False
-        if user_data.get(EMAIL) and user_data.get(PASSWORD) :
-            dicu[EMAIL] = user_data.get(EMAIL)
-            dicu[PASSWORD] = user_data.get(PASSWORD)
+        email = user_data.get("email") 
+        password = user_data.get("password")
+        phone = user_data.get("phone")
 
-        if user_data.get(PHONE) :
-            dicu[PHONE] = user_data.get("phone")
-            phoneSignIn = True
-            dicu["is_phone_signin"] = True
+        if email and password :
+            dicu[CommonConstants.EMAIL] = email
+            dicu[CommonConstants.PASSWORD] = password
+
+        elif phone and (not email and not password) :
+            dicu[CommonConstants.PHONE] = user_data.get("phone")
+            dicu[SessionConstants.PHONE_LOGIN] = True
+        else :
+            return -1
             
-        res = await loginSupports(dicu)
+        res = await sessionLogin(dicu)
         return res
 
     except Exception as e :
@@ -34,8 +39,8 @@ async def loginHandler(user_data):
 async def forgotPassword(user_data):
     try:
         dicu = {}
-        dicu[EMAIL] = user_data.get("email")
-        dicu[PHONE] = user_data.get("phone")
+        dicu[CommonConstants.EMAIL] = user_data.get("email")
+        dicu[CommonConstants.PHONE] = user_data.get("phone")
         await signUpSupports(dicu)
 
     except Exception as e :
@@ -61,29 +66,35 @@ async def signupHandler(user_data):
         if not email or not phone or not password or not role or not dept or not fname:
             return -1
         
-        dicu = {}
-        dicu[EMAIL] = email
-        dicu[PHONE] = phone
-        dicu[PASSWORD] = password
-        dicu[ROLE] = role 
-        dicu[DEPT] = dept
-        dicu[FNAME] = fname 
-        dicu[MNAME] = mname 
-        dicu[LNAME] = lname 
-        dicu[DOB] = dob
-        dicu[USER_AGENT] = userAgent
-        dicu[CLIENT_IP] = clientIp
-
-        #check if exist or not
         check = await ifAccountDataExists(email,phone)
         responseObj = None
+
+        # check if exist or not
+        if check and check["result"] == 1 :
+            logging.exception("[verification][User {} Cannot be added ][reason {} already existed]".format(fname,check["reason"]))
+            return -1
+
+        dicu = {}
+        dicu[CommonConstants.EMAIL] = email
+        dicu[CommonConstants.PHONE] = phone
+        dicu[CommonConstants.PASSWORD] = password
+        dicu[CommonConstants.ROLE] = role 
+        dicu[CommonConstants.DEPT] = dept
+        dicu[CommonConstants.FNAME] = fname 
+        dicu[CommonConstants.MNAME] = mname 
+        dicu[CommonConstants.LNAME] = lname 
+        dicu[CommonConstants.DOB] = dob
+        dicu[CommonConstants.USER_AGENT] = userAgent
+        dicu[CommonConstants.CLIENT_IP] = clientIp
+
         if check and check["result"] == -1:
             res = await signUpSupports(dicu)
             if res:
                 responseObj = await createAccountForNewUser(res)
-        elif check and check["result"] == 1 :
-            logging.exception("[verification][User {} Cannot be added ][reason {} already existed]".format(fname,check["reason"]))
-            responseObj = -1
+                if responseObj == 1 :
+                    responseObj = "Data Inserted Sucessfully"
+                else:
+                    responseObj = "Pod Mara gelo r ki"
         return responseObj
 
     except Exception as e :

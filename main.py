@@ -2,6 +2,7 @@ from fastapi import FastAPI,Request,Response
 from fastapi.responses import JSONResponse
 from Filter.verification import signupHandler,loginHandler
 from Commons.services import onStartService
+from Commons.constants import CommonConstants
 import logging
 
 
@@ -16,7 +17,7 @@ def root():
     return "Hello from Space! 🚀"
 
 
-@app.get("/public/login")
+@app.post("/public/login")
 async def login(request : Request):
     try:
         user_data = await request.json()
@@ -28,20 +29,19 @@ async def login(request : Request):
         logging.exception("[main][Exception in login] {} ".format(e))
 
 
-@app.get("/public/signup")
+@app.post("/public/signup")
 async def signup(request : Request):
     try :
         user_data = await request.json()
         client_ip = request.client.host
         user_agent = request.headers.get("user-agent")
 
-        user_data["user_agent"] = user_agent
-        user_data["client_ip"] = client_ip
-        logging.info("[main][signup][User Data Received] {}".format(user_data))
+        user_data[CommonConstants.USER_AGENT] = user_agent
+        user_data[CommonConstants.CLIENT_IP] = client_ip
+        logging.info("[main][signup][User Data Received] {} ".format(user_data))
 
         temp = await signupHandler(user_data)
         response = JSONResponse(content=temp)
-
         return response
     except Exception as e :
         logging.exception("[main][Exception in signup] {} ".format(e))
@@ -54,6 +54,20 @@ async def signup(request : Request):
 def user():
     return "Hello from Space! 🚀"
 
+
+@app.get("/superadmin/{user_accesslevel}/readlogs")
+def readlogs():
+    try:
+        pass
+
+
+    except Exception as ex :
+        logging.exception("[main][Exception in signup] {} ".format(ex))
+
+
+
 @app.get("/")
 def root():
     return "Hello from Space! 🚀"
+
+
