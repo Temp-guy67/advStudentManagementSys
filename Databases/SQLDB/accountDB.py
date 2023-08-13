@@ -1,7 +1,7 @@
 import logging
-from ResponseObject.response import ResponseObject
 from Databases.SQLDB.DBOperations import dbOperationHandler
 from Commons.constants import CommonConstants
+from Databases.dbconstants import DBConstants,DBOperationOPR
 
 #FilenName : accountDB
 # .mode box to show data in bOX
@@ -14,7 +14,7 @@ class AccountObject :
         self.keys = []
         self.vals = []
 
-    async def __createAccountObject(self,data):
+    async def _createAccountObject(self,data):
         logging.info("[accountDB][createAccountObject][Data] {} ".format(data))
         try :
             self.keys = []
@@ -54,105 +54,98 @@ class AccountObject :
                 self.keys.append(CommonConstants.LAST_UPDATED_TIME)
                 self.vals.append(lastUpdatedTime)
 
+            return self.__insertDataInAccountTable()
+
         except Exception as ex :
             logging.error("[accountDB][createAccountObject][Exception in the Constructor] {} ".format(ex))
 
 
-    async def createAccountTable(self):
-        res = await self.__createAccountTableInDB()
-        if res == 1 :
-            logging.info("[accountDB][createAccount][Table Created]")
-        else :
-            logging.info("[accountDB][createAccount][Table NOT Created]")
-
-
-    async def createAccountForUser(self, data):
-        try :
-            #To Create new table
-            # await self.createAccountTable()
-
-            await self.__createAccountObject(data)
-            return await self.__insertDataInAccountTable()
-            
-        except Exception as ex :
-            logging.error("[AccountDB][createAccountForUser][Got Exception] {} ".format(ex))
-
-
-    async def __createAccountTableInDB(self):
+    async def _createAccountTableInDB(self):
         columnsDesc = ["user_id TEXT UNIQUE", "email TEXT UNIQUE","phone TEXT UNIQUE" , "id TEXT UNIQUE","verified INTEGER", "role INTEGER","dob TEXT","access_level INTEGER", "inbox_id TEXT" , "last_updated_time TEXT"]
 
         data = dict()
-        data["dbName"] = DB_NAME
-        data["tableName"] = TABLE_NAME
-        data["columnDesc"] = columnsDesc
-        return await dbOperationHandler(None,None,data,"create_new_db")
+        data[DBConstants.DB_NAME] = DB_NAME
+        data[DBConstants.TABLE_NAME] = TABLE_NAME
+        data[DBConstants.COLUMN_DESC] = columnsDesc
+        return await dbOperationHandler(None,None,data, DBOperationOPR.CREATE)
         
 
     async def __insertDataInAccountTable(self):
         data = {}
-        data["dbName"] = DB_NAME
-        data["tableName"] = TABLE_NAME
+        data[DBConstants.DB_NAME] = DB_NAME
+        data[DBConstants.TABLE_NAME] = TABLE_NAME
         data["keys"] = self.keys
         data["values"] = self.vals
-
-        return await dbOperationHandler(None,None,data,"insert_row")
+        return await dbOperationHandler(None,None,data,DBOperationOPR.INSERT)
     
     async def _readDataInAccountTable(self,dicu):
         data = dict()
-        data["dbName"] = DB_NAME
-        data["tableName"] = TABLE_NAME
-        data["columns"] = dicu["columns"]
-        data["conditions"] = dicu["conditions"]
-
-        return await dbOperationHandler(None,None,data,"read_data")
+        data[DBConstants.DB_NAME] = DB_NAME
+        data[DBConstants.TABLE_NAME] = TABLE_NAME
+        data[DBConstants.COLUMNS] = dicu["columns"]
+        data[DBConstants.CONDITIONS] = dicu["conditions"]
+        return await dbOperationHandler(None,None,data,DBOperationOPR.READ)
     
-    async def __updateDataInAccountTable(self,dicu):
+    async def _updateDataInAccountTable(self,dicu):
         data = dict()
-        data["dbName"] = DB_NAME
-        data["tableName"] = TABLE_NAME
-        data["columns"] = dicu["columns"]
-        data["conditions"] = dicu["conditions"]
-
-        return await dbOperationHandler(None,None,data,"update")
+        data[DBConstants.DB_NAME] = DB_NAME
+        data[DBConstants.TABLE_NAME] = TABLE_NAME
+        data[DBConstants.COLUMNS] = dicu["columns"]
+        data[DBConstants.CONDITIONS] = dicu["conditions"]
+        return await dbOperationHandler(None,None,data,DBOperationOPR.UPDATE)
     
-    async def __deleteDataInAccountTable(self,dicu):
+    async def _deleteDataInAccountTable(self,dicu):
         data = dict()
-        data["dbName"] = DB_NAME
-        data["tableName"] = TABLE_NAME
-        data["columns"] = dicu["columns"]
-        data["conditions"] = dicu["conditions"]
+        data[DBConstants.DB_NAME] = DB_NAME
+        data[DBConstants.TABLE_NAME] = TABLE_NAME
+        data[DBConstants.COLUMNS] = dicu["columns"]
+        data[DBConstants.CONDITIONS] = dicu["conditions"]
+        return await dbOperationHandler(None,None,data,DBOperationOPR.DELETE)
+    
 
-        return await dbOperationHandler(None,None,data,"delete")
+###########################################################################
 
+async def createAccountForUser(data):
+    try :
+        accObj = AccountObject()
+        #To create new account Table
+        # await accObj.__createAccountTableInDB()
+        return await accObj._createAccountObject(data)
+        
+    except Exception as ex :
+        logging.error("[AccountDB][createAccountForUser][Caught Exception] {} ".format(ex))
+
+
+async def readAccountData(column, contidions):
+    data = dict()
+    data["columns"] = column
+    data["conditions"] = contidions
+    accObj = AccountObject()
+    temp = await accObj._readDataInAccountTable(data)
+    return temp
 
 
 async def ifAccountDataExists(email,phone):
-    res = {}
-
     try:
-        arr = [["email",email,"="] , ["phone",phone,"="]]
-        table_name = "AccountsData"
-    
+        arr = [["email",email,"="] , ["phone",phone,"="]]    
         for e in arr :
-            data = dict()
-            data["columns"] = None
-            data["conditions"] = [e]
-                
-            data["dbName"] = DB_NAME
-            data["tableName"] = table_name
-            temp =  await dbOperationHandler(None,None,data,"read_data")
-            if temp :
-                res["result"] = 1
-                res["reason"] = e[0]
-                return res
-        res["result"] = -1
-        res["reason"] = None
+            res = await readAccountData([], [e])
+            if res :
+                return e[0]
     except Exception as ex :
         logging.error("[AccountDB][ifAccountDataExists][Got Exception] {} ".format(ex))
 
-    return res
+    return None
 
+async def getLoginData(data):
+    if data.get("email"):
+        conditions = [["email",data["email"],"="]]
     
+    if data.get("phone"):
+        conditions = [["phone",data["phone"],"="]]
+
+        
+
 
 
 

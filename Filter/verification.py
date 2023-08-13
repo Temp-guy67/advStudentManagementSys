@@ -1,9 +1,9 @@
 #verification login and signup
 from Commons.constants import CommonConstants,SessionConstants
 from Commons.generateSupportFields import signUpSupports
-from Databases.SQLDB.commonDBhandler import createAccountForNewUser
+from Databases.SQLDB.sessionController import createAccountForNewUser
 from Databases.SQLDB.accountDB import ifAccountDataExists
-from Filter.sessionControllers import sessionLogin
+from Databases.SQLDB.sessionController import sessionsController
 import logging
 
 
@@ -11,29 +11,33 @@ async def verificationHandler():
     pass
 
 
-
 async def loginHandler(user_data):
     try :
-        dicu = {}
         email = user_data.get("email") 
         password = user_data.get("password")
         phone = user_data.get("phone")
+        userAgent = user_data.get("user_agent")
+        clientIp = user_data.get("client_ip")
+
+        dicu = {}
 
         if email and password :
             dicu[CommonConstants.EMAIL] = email
             dicu[CommonConstants.PASSWORD] = password
 
         elif phone and (not email and not password) :
-            dicu[CommonConstants.PHONE] = user_data.get("phone")
-            dicu[SessionConstants.PHONE_LOGIN] = True
+            dicu[CommonConstants.PHONE] = phone
+            
         else :
             return -1
-            
-        res = await sessionLogin(dicu)
+        
+        dicu[CommonConstants.USER_AGENT] = userAgent
+        dicu[CommonConstants.CLIENT_IP] = clientIp
+        res = await sessionsController(dicu)
         return res
 
     except Exception as e :
-        logging.exception("[verification][Exception in loginHandler]  %s", str(e),"[UserData]",user_data)
+        logging.exception("[verification][Exception in loginHandler] {} ".format(e))
 
 
 async def forgotPassword(user_data):
@@ -67,11 +71,10 @@ async def signupHandler(user_data):
             return -1
         
         check = await ifAccountDataExists(email,phone)
-        responseObj = None
 
         # check if exist or not
-        if check and check["result"] == 1 :
-            logging.exception("[verification][User {} Cannot be added ][reason {} already existed]".format(fname,check["reason"]))
+        if check and check == 1 :
+            logging.exception("[verification][User {} Cannot be added ][reason {} already existed]".format(fname,check))
             return -1
 
         dicu = {}

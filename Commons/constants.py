@@ -27,6 +27,7 @@ class CommonConstants:
     LAST_UPDATED_TIME="last_updated_time"
     DOB="dob"
     CLIENT_IP="client_ip"
+    OPT="otp"
 
 
 class SqlDBConstants :
@@ -43,3 +44,5 @@ class TypeClassifications:
 
 class SessionConstants:
     PHONE_LOGIN="phone_login"
+
+

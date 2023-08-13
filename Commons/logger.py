@@ -4,9 +4,13 @@ import logging
 def configure_logging():
     logging.basicConfig(
         filename='app.log',
-        filemode='w',
+        filemode='a' ,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
     logging.getLogger().setLevel(logging.DEBUG)
+    logging.info("")
+    logging.info("")
     logging.info("Logger Inititated for this session ")
+
+
 

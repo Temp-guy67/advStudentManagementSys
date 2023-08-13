@@ -1,7 +1,6 @@
 import datetime
 from Commons.constants import CommonConstants,TypeClassifications
 import time,random
-from Databases.FireabaseDB.firebase_get import getLast
 # from SQLDB.accountDB import createAccount
 from Databases.SQLDB.commonRulesDB import Conf
 import logging

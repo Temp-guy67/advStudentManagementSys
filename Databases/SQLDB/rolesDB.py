@@ -1,5 +1,4 @@
 import logging
-from ResponseObject.response import ResponseObject
 from Databases.SQLDB.DBOperations import dbOperationHandler
 from Commons.constants import CommonConstants
 
