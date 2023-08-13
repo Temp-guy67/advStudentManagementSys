@@ -1,1 +1,34 @@
-2023-07-11 18:02:48,889 - root - INFO - Logger Inititated for this session 
+2023-08-11 17:44:32,410 - root - INFO - 
+2023-08-11 17:44:32,410 - root - INFO - 
+2023-08-11 17:44:32,410 - root - INFO - Logger Inititated for this session 
+2023-08-11 17:44:41,692 - root - INFO - 
+2023-08-11 17:44:41,692 - root - INFO - 
+2023-08-11 17:44:41,692 - root - INFO - Logger Inititated for this session 
+2023-08-11 17:44:44,518 - root - INFO - [main][signup][User Data Received] {'email': 'test1@testmail.com', 'password': 'Test@123', 'phone': '12345679', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'user_agent': 'Thunder Client (https://www.thunderclient.com)', 'client_ip': '127.0.0.1'} 
+2023-08-11 17:44:44,518 - root - INFO - [DBOperations][__readDataFromTable][query] []
+2023-08-11 17:44:44,519 - root - ERROR - [DBOperations][Exception in __readDataFromTableTemplate] too many values to unpack (expected 3)
+Traceback (most recent call last):
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Databases/SQLDB/DBOperations.py", line 109, in __readDataFromTable
+    query += ' AND '.join(f"{key} {sign} '{value}'" for key, value ,sign in conditions)
+  File "/Users/dev-15158/codingfiles/VScode files/Project Files/Pyhton projects/FastAPI/StudentManagementSystem/Databases/SQLDB/DBOperations.py", line 109, in <genexpr>
+    query += ' AND '.join(f"{key} {sign} '{value}'" for key, value ,sign in conditions)
+ValueError: too many values to unpack (expected 3)
+2023-08-11 17:44:44,520 - root - ERROR - [verification][User ABC Cannot be added ][reason 1 already existed]
+NoneType: None
+2023-08-11 17:49:41,474 - root - INFO - 
+2023-08-11 17:49:41,474 - root - INFO - 
+2023-08-11 17:49:41,474 - root - INFO - Logger Inititated for this session 
+2023-08-11 17:49:46,957 - root - INFO - [main][signup][User Data Received] {'email': 'test1@testmail.com', 'password': 'Test@123', 'phone': '12345679', 'role': '3', 'dept': 'EE', 'fname': 'ABC', 'mname': 'PQR', 'lname': 'XYZ', 'user_agent': 'Thunder Client (https://www.thunderclient.com)', 'client_ip': '127.0.0.1'} 
+2023-08-11 17:49:46,958 - root - INFO - [DBOperations][__readDataFromTable][query] []
+2023-08-11 17:49:46,958 - root - INFO - [DBOperations][__readDataFromTable][query] SELECT user_id, email, phone, id, verified, role, dob, access_level, inbox_id, last_updated_time FROM AccountsData  WHERE email = 'test1@testmail.com';
+2023-08-11 17:49:46,958 - root - ERROR - [verification][User ABC Cannot be added ][reason 1 already existed]
+NoneType: None
+2023-08-11 17:53:41,334 - root - INFO - 
+2023-08-11 17:53:41,334 - root - INFO - 
+2023-08-11 17:53:41,334 - root - INFO - Logger Inititated for this session 
+2023-08-11 17:54:55,086 - root - INFO - 
+2023-08-11 17:54:55,086 - root - INFO - 
+2023-08-11 17:54:55,086 - root - INFO - Logger Inititated for this session 
+2023-08-11 17:55:15,287 - root - INFO - 
+2023-08-11 17:55:15,287 - root - INFO - 
+2023-08-11 17:55:15,287 - root - INFO - Logger Inititated for this session 
